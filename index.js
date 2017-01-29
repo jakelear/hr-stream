@@ -30,8 +30,8 @@ var limit = 120,
     duration = 750,
     now = new Date(Date.now() - duration)
 
-var width = 1000,
-    height = 600
+var width = 600,
+    height = 300
 
 var series = {
   value: 0,
