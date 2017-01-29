@@ -1,5 +1,6 @@
 <html>
 <head>
+  <link rel="stylesheet" type="text/css" href="./styles.css">
 </head>
 
 <body>
@@ -10,81 +11,10 @@
         <svg class="heart" viewBox="0 0 54 46" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
             <path fill-opacity="0" stroke="white" stroke-width="2" stroke-opacity="1" d="M13.4200513,0.37016 C9.99375671,0.37016 6.56052849,1.66968938 3.94049561,4.25222306 C-1.29957028,9.41723264 -1.29356116,17.7893543 3.94049561,22.9584547 L25.1746357,43.9398652 C25.6248784,44.3849915 26.3494548,44.3849915 26.7996975,43.9398652 C33.8862956,36.9547865 40.9833525,29.9798193 48.0699507,22.9945672 C53.3100164,17.8295692 53.3100164,9.43531777 48.0699507,4.27030819 C42.8298849,-0.894759172 34.35102,-0.894874732 29.1108964,4.27030819 L26.0232502,7.33981148 L22.8995493,4.25222306 C20.2795164,1.66968938 16.8462882,0.37010222 13.4200513,0.37016 L13.4200513,0.37016 Z"></path>
         </svg>
-        <p>58</p>
+        <p></p>
       </div>
     </div>
   </div>
-
-  <style>
-    body {
-      /*background: url('https://cdn0.vox-cdn.com/thumbor/TuDF3mz8JGdbIQaq0uOcSokCN7E=/cdn0.vox-cdn.com/uploads/chorus_asset/file/6557539/overwatch-review-screen-3.0.jpg');*/
-      padding: 0;
-      margin: 0;
-    }
-
-    #wrapper {
-      position: absolute;
-      bottom: 0;
-      right: 0;
-    }
-
-    #heartrate {
-      color: #FFF;
-      display: flex;
-      font-size: 18px;
-      font-family: sans-serif;
-      align-items: center;
-      justify-content: center;
-      position: absolute;
-      bottom: 10px;
-      left: 50%;
-    }
-
-    #heartrate p {
-      margin: 0;
-      position: absolute;
-      left: 35px;
-    }
-
-    .heart {
-      fill: #FFF;
-      overflow: visible;
-      width: 25px;
-      height: 30px;
-      margin-right: 10px;
-    }
-
-    .heart path {
-      fill: #FFF;
-      color: #FFF;
-    }
-
-    #canvas {
-      border: 1px solid rgba(255, 255, 255, 0.5);
-      border-width: 1px 0 0 1px;
-      position: relative;
-      /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#000000+0,000000+100&1+0,0+100 */
-
-    }
-
-    #canvas::after {
-      background: #000;
-      content: '';
-      position: absolute;
-      height: 100%;
-      width: 100%;
-      right: 0;
-      top: 0;
-      opacity: .5;
-      z-index: -1;
-    }
-
-    #canvas .series-path {
-      fill: none;
-      stroke: black;
-      stroke-width: 3.5;
-    }
-  </style>
   <script type="text/javascript" src="http://mbostock.github.com/d3/d3.js"></script>
   <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
   <script src="./index.js"></script>

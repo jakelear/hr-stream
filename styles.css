@@ -1,0 +1,54 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
+#wrapper {
+  bottom: 0;
+  position: absolute;
+  right: 0;
+}
+
+#heartrate {
+  align-items: center;
+  bottom: 10px;
+  color: #FFF;
+  display: flex;
+  font-family: sans-serif;
+  font-size: 18px;
+  justify-content: center;
+  left: 50%;
+  position: absolute;
+}
+
+#heartrate p {
+  left: 35px;
+  margin: 0;
+  position: absolute;
+}
+
+.heart {
+  fill: #FFF;
+  height: 30px;
+  margin-right: 10px;
+  overflow: visible;
+  width: 25px;
+}
+
+.heart path {
+  color: #FFF;
+  fill: #FFF;
+}
+
+#canvas {
+  background: rgba(0,0,0, 0.5);
+  border-width: 1px 0 0 1px;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  position: relative;
+}
+
+#canvas .series-path {
+  fill: none;
+  stroke-width: 3.5;
+  stroke: black;
+}
