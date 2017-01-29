@@ -1,6 +1,9 @@
 window.addEventListener('load', init, false);
 
 var current_rate = 60;
+var min_rate = 50;
+var max_rate = 150;
+
 function init() {
   doPoll();
 }
@@ -30,14 +33,12 @@ var limit = 120,
 var width = 600,
     height = 300
 
-var groups = {
-    current: {
-        value: 0,
-        color: 'white',
-        data: d3.range(limit).map(function() {
-            return 0
-        })
-    }
+var series = {
+  value: 0,
+  color: 'white',
+  data: d3.range(limit).map(function() {
+      return min_rate;
+  })
 }
 
 var x = d3.time.scale()
@@ -45,27 +46,28 @@ var x = d3.time.scale()
     .range([0, width])
 
 var y = d3.scale.linear()
-    .domain([45, 120])
-    .range([height - 120, 0])
+    .domain([min_rate, max_rate])
+    .range([height + min_rate, min_rate])
 
 var line = d3.svg.line()
     .interpolate('basis')
     .x(function(d, i) {
-        return x(now - (limit - 1 - i) * duration)
+      return x(now - (limit - 1 - i) * duration)
     })
     .y(function(d) {
-        return y(d)
+      return y(d)
     })
 
 var svg = d3.select('#canvas').append('svg')
     .attr('class', 'chart')
     .attr('width', width)
-    .attr('height', height + 50)
+    .attr('height', height + (min_rate * 2))
 
 //Container for the gradients
 var defs = svg.append("defs");
 
-//Filter for the outside glow
+// Filter for the outside glow
+
 var filter = defs.append("filter")
     .attr("id","glow");
 filter.append("feGaussianBlur")
@@ -79,42 +81,31 @@ feMerge.append("feMergeNode")
 
 var paths = svg.append('g')
 
-for (var name in groups) {
-    var group = groups[name]
-    group.path = paths.append('path')
-        .data([group.data])
-        .attr('class', name + ' group')
-        .style('stroke', group.color)
-        .style("filter", "url(#glow)")
-}
+series.path = paths.append('path')
+  .data([series.data])
+  .attr('class', 'series-path')
+  .style('stroke', series.color)
+  //.style("filter", "url(#glow)")
 
 function tick() {
-now = new Date()
+now = new Date();
+  // Add new values
 
-    // Add new values
-    for (var name in groups) {
-        var group = groups[name]
-        //group.data.push(group.value) // Real values arrive at irregular intervals
-        group.data.push(current_rate)
-        group.path.attr('d', line)
-    }
+  series.data.push(current_rate)
+  series.path.attr('d', line)
 
-    // Shift domain
-    x.domain([now - (limit - 2) * duration, now - duration])
+  // Shift domain
+  x.domain([now - (limit - 2) * duration, now - duration])
 
-    // Slide paths left
-    paths.attr('transform', null)
-        .transition()
-        .duration(duration)
-        .ease('linear')
-        .attr('transform', 'translate(' + x(now - (limit - 1) * duration) + ')')
-        .each('end', tick)
+  // Slide paths left
+  paths.attr('transform', null)
+      .transition()
+      .duration(duration)
+      .ease('linear')
+      .attr('transform', 'translate(' + x(now - (limit - 1) * duration) + ')')
+      .each('end', tick)
 
-    // Remove oldest data point from each group
-    for (var name in groups) {
-        var group = groups[name]
-        group.data.shift()
-    }
+  series.data.shift();
 }
 
 tick();
