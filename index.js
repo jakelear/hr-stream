@@ -30,8 +30,8 @@ var limit = 120,
     duration = 750,
     now = new Date(Date.now() - duration)
 
-var width = 600,
-    height = 300
+var width = 1000,
+    height = 600
 
 var series = {
   value: 0,
@@ -85,7 +85,7 @@ series.path = paths.append('path')
   .data([series.data])
   .attr('class', 'series-path')
   .style('stroke', series.color)
-  //.style("filter", "url(#glow)")
+  .style("filter", "url(#glow)")
 
 function tick() {
 now = new Date();
