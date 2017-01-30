@@ -8,6 +8,8 @@ I've only tested it with a Polar HR7 band.
 
 `stream.js` reads from the heart rate band and logs the latest rate to `rate.json` (This uses [Noble](https://github.com/sandeepmistry/noble))
 
+### [Video example](https://www.youtube.com/watch?v=NVHmCxytuLY&feature=youtu.be)
+
 ## How to use this
 
 - [Install node](https://nodejs.org/en/download/)
