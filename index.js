@@ -4,8 +4,8 @@ var HRStream = {
   min_rate: 50,
   max_rate: 150,
   pulse_anim_rate: 700,
-  graph_height: 300,
-  graph_width: 600,
+  graph_height: 720,
+  graph_width: 1280,
   graph_color: '#FFF',
 
   /**
@@ -26,7 +26,7 @@ var HRStream = {
   updateRate: function() {
     $.get('rate.json', function(data) {
       HRStream.current_rate = data.rate;
-      $('#heartrate p').text(HRStream.current_rate);
+      $('#heartrate-number').text(HRStream.current_rate);
       setTimeout(HRStream.updateRate, HRStream.poll_timing);
     });
   },
@@ -43,7 +43,7 @@ var HRStream = {
     animation_rate = animation_rate < 200 ? 200 : animation_rate;
     var $heart = $('.heart');
     $heart.animate({
-      width: (back) ? $heart.width() + 2 : $heart.width() - 2
+      width: (back) ? $heart.width() + 4 : $heart.width() - 4
     }, animation_rate, function(){HRStream.pulse(!back)});
   },
 
@@ -95,13 +95,23 @@ var HRStream = {
     // Filter for the outside glow
 
     var filter = defs.append("filter")
-        .attr("id","glow");
+        .attr("id","glow")
+        .attr("height", "300%")
+        .attr("width", "300%");
+    filter.append("feFlood")
+      .attr("flood-color", "#2dff0a")
+      .attr("flood-opacity", "1");
+    filter.append("feComposite")
+      .attr("in", "flood")
+      .attr("result", "mask")
+      .attr("in2", "SourceGraphic")
+      .attr("operator", "in");
     filter.append("feGaussianBlur")
-        .attr("stdDeviation","3.5")
+        .attr("stdDeviation","10.5")
         .attr("result","coloredBlur");
     var feMerge = filter.append("feMerge");
     feMerge.append("feMergeNode")
-        .attr("in","coloredBlur");
+        .attr("in","blurred");
     feMerge.append("feMergeNode")
         .attr("in","SourceGraphic");
 
